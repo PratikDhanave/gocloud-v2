@@ -1,5 +1,8 @@
 package ec2
 
+import(
+	. "github.com/scorelab/gocloud/auth"
+)
 const (
 	debug = false
 
@@ -9,20 +12,17 @@ const (
 )
 
 //Authentication struct to store AccessKey and SecretKey
-type Auth struct {
-	AccessKey string
-	SecretKey string
-}
 
 //Ec2 struct
 
 type EC2 struct {
-	Auth
+  AWSauthbase
 	Region
+	Auth
 	Private byte
 }
 
 // Function return EC2 instance
-func New2(auth Auth, region Region) *EC2 {
-	return &EC2{auth, region, 0}
+func New2(aWSauthbase AWSauthbase,auth Auth, region Region) *EC2 {
+	return &EC2{aWSauthbase,region,auth, 0}
 }
